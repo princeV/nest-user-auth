@@ -56,7 +56,7 @@ export class User {
   ){}
 }
 ```
-* This will be the structure of the returned object from the database.  
+* This will be the structure of the returned object from the database 
 
 
 ### Mongoose
