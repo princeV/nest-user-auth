@@ -2,10 +2,12 @@ import { Controller, UseGuards, Get, Post, Body, Put, Param, Delete, Query, Req 
 import { CreateUserDto } from './dto/create-user.dto';
 import { LogonUserDto } from './dto/logon-user.dto';
 import { UserService } from './user.service';
-import { User } from './interfaces/user.interface';
 import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('api/user')
+@UseGuards(RolesGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -21,6 +23,7 @@ export class UserController {
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
+  @Roles('admin')
   async findAll(@Req() request): Promise<User[]> {
     // all userdata here (no pwd)
     console.log(request.user);

@@ -17,5 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 */
   async validate(payload: any, done: Function) {
     done(null, payload);
+    //to do -> maybe check if user exsists -> used to make sure deleted users
+    // do not have any possibility to do things anymore
   }
 }

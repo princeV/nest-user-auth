@@ -17,4 +17,8 @@ export class AuthService {
 
     return jwt.sign(user, secretOrKey, {expiresIn});
   }
+
+  async decodeToken(token: any): Promise<any> {
+    return jwt.decode(token);
+  }
 }
