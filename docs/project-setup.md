@@ -28,9 +28,9 @@ Let's first generate the user __module__ via cli that we want to use:
 $ nest g mo user
 ```
 
-### Data Transfer Objects (dto)
+### Data Transfer Objects (dtos)
 As a next step we will create our Data Transfer Object that will be used to transfer the data of the user via our api.
-For that we create a __subfolder in user__ with the name __dto__.
+For that we create a __subfolder in user__ with the name __dtos__.
 
 We first define the logon user object that we use to log on with a user:  
 Create the file __logon-user.dto.ts__:
@@ -56,8 +56,8 @@ This object has all data that is relevant from a create-user form perspective.
 
 __Note__:  We have username here but this will not be user for logon, we use email to identify the user during logon.
 
-### Interface
-Create folder "interface" under user.
+### Interfaces
+Create folder "interfaces" under user.
 We will use class instead of interface even if the name is suggesting the use of an interface.  
 Add file __user.interface.ts__ to the file with the following content:
 ```typescript
@@ -357,7 +357,7 @@ export class UserModule {}
 
 #### User Exception
 Let's also create a custom exception for an invalid user logon.
-For that we create a new folder: __exception__.
+For that we create a new folder: __exceptions__.
 In the folder we create a file called __user-credential.exception.ts__:
 
 Add this code:
@@ -386,10 +386,10 @@ Create the following code in the file:
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from './interface/user.interface';
-import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './interfaces/user.interface';
+import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from '../auth/auth.service';
-import { UserCredentialException } from "./exception/user-credential.exception.ts";
+import { UserCredentialException } from "./exceptions/user-credential.exception.ts";
 
 
 @Injectable()
@@ -437,8 +437,8 @@ In the controller add the following code:
 
 ```typescript
 import { Controller, UseGuards, Get, Post, Body, Put, Param, Delete, Query, Req } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { LogonUserDto } from './dto/logon-user.dto';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { LogonUserDto } from './dtos/logon-user.dto';
 import { UserService } from './user.service';
 import { User } from './interfaces/user.interface';
 import { AuthGuard } from '@nestjs/passport';
